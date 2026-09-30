@@ -11,6 +11,28 @@ You'll first have to install the older version of typescript that works with Ast
 pnpm i -D @typescript/typescript6
 ```
 
+## Astro < 7.3.5
+
+[Follow these steps](#the-hack)
+
+## Astro >= 7.3.5
+
+- You'll get an error saying: `astro check does not currently support TypeScript 7.0. To continue using astro check, install TypeScript 6 instead.`
+- Locate the following file in your node_modules folder: `astro/dist/cli/check/index.js`
+- On line 13, change the following code:
+
+```ts
+const typescriptVersion = await getPackageVersion("typescript", flags.root);
+```
+
+- Replace that line with the following:
+
+```ts
+const typescriptVersion = await getPackageVersion("@typescript/typescript6", flags.root);
+```
+
+- [Follow these steps](#the-hack)
+
 ## The Hack
 
 - Run the `astro check` command.
